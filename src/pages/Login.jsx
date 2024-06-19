@@ -1,38 +1,34 @@
 import React from 'react'
 import styled from 'styled-components';
 
-const Join = () => {
+const Login = () => {
     return (
-        <JoinWrapper>
+        <LoginWrapper>
             <Form>
-                <Title> 회원가입 </Title>
-                <JoinInput>
+                <Title> 로그인 </Title>
+                <LoginInput>
                     <Label>아이디:</Label>
                     <Input type="email" placeholder="아이디를 입력하세요" />
-                </JoinInput>
+                </LoginInput>
 
-                <JoinInput>
+                <LoginInput>
                     <Label>비밀번호:</Label>
                     <Input type="password" placeholder="비밀번호를 입력하세요" />
-                </JoinInput>
+                </LoginInput>
 
-                <JoinInput>
-                    <Label> 닉네임:</Label>
-                    <Input type="text" placeholder="닉네임을 입력하세요" />
-                </JoinInput>
-                <Button type="submit">
-                    회원가입
+                <Button>
+                    <LoginButton> 로그인 </LoginButton>
+                    <JoinButton> 회원가입 </JoinButton>
                 </Button>
-                <Text> 구글로 회원가입 하기 </Text>
+                <Text> 구글로 로그인 하기 </Text>
             </Form>
-        </JoinWrapper>
+        </LoginWrapper>
     );
 };
 
+export default Login;
 
-export default Join;
-
-const JoinWrapper = styled.div`
+const LoginWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -60,7 +56,7 @@ const Title = styled.div`
     font-size: 30px;
 `;
 
-const JoinInput = styled.div`
+const LoginInput = styled.div`
   margin: 20px 0;
   width: 80%;
   text-align: left;
@@ -83,9 +79,26 @@ const Input = styled.input`
   margin-top: 5px;
 `;
 
-
-const Button = styled.button`
+const Button = styled.div`
+    
+`;
+const LoginButton = styled.button`
   background-color: #CFB8FF;
+  color: black;
+  border: none;
+  padding: 10px 80px;
+  margin: 20px;
+  cursor: pointer;
+  font-size: 20px;
+  border-radius: 15px;
+
+  &:hover {
+    background-color: #f8cacc;
+  }
+`;
+
+const JoinButton = styled.button`
+background-color: #CFB8FF;
   color: black;
   border: none;
   padding: 10px 80px;
@@ -102,3 +115,4 @@ const Button = styled.button`
 const Text = styled.div`
   font-size: 20px; 
 `;
+
