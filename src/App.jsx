@@ -1,19 +1,8 @@
-import React from 'react'
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import GlobalStyle from './styles/GlobalStyle';
-import Join from './pages/Join';
-import Login from './pages/Login';
+import { RouterProvider } from 'react-router-dom';
+import router from './routers/router';
 
-const App = () => {
-  return (
-    <BrowserRouter>
-      <GlobalStyle />
-      <Routes>
-        <Route path='/login' element={<Login />} />
-        <Route path='/join' element={<Join />} />
-      </Routes>
-    </BrowserRouter>
-  );
-};
+function App() {
+  return <RouterProvider router={router} />;
+}
 
 export default App;
