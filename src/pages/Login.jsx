@@ -3,30 +3,30 @@ import styled from 'styled-components';
 import { FcGoogle } from "react-icons/fc";
 
 const Login = () => {
-    return (
-        <LoginWrapper>
-            <Form>
-                <Title> 로그인 </Title>
-                <LoginInput>
-                    <Label>아이디:</Label>
-                    <Input type="email" placeholder="아이디를 입력하세요" />
-                </LoginInput>
+  return (
+    <LoginWrapper>
+      <Form>
+        <Title> 로그인 </Title>
+        <LoginInput>
+          <Label>아이디:</Label>
+          <Input type="email" placeholder="아이디를 입력하세요" />
+        </LoginInput>
 
-                <LoginInput>
-                    <Label>비밀번호:</Label>
-                    <Input type="password" placeholder="비밀번호를 입력하세요" />
-                </LoginInput>
+        <LoginInput>
+          <Label>비밀번호:</Label>
+          <Input type="password" placeholder="비밀번호를 입력하세요" />
+        </LoginInput>
 
-                <Button>
-                    <LoginButton> 로그인 </LoginButton>
-                    <JoinButton> 회원가입 </JoinButton>
-                </Button>
+        <Button>
+          <LoginButton> 로그인 </LoginButton>
+          <JoinButton> 회원가입 </JoinButton>
+        </Button>
 
-                <FcGoogle size="30" />
+        <FcGoogle size="30" />
 
-            </Form>
-        </LoginWrapper>
-    );
+      </Form>
+    </LoginWrapper>
+  );
 };
 
 export default Login;
@@ -39,6 +39,7 @@ const LoginWrapper = styled.div`
   padding: 20px; 
   background-color: #FEFFDD;
   margin: 20px;
+  border: 1px solid #333;
 `;
 
 
