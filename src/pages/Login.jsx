@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
+import { FcGoogle } from "react-icons/fc";
 
 const Login = () => {
     return (
@@ -20,7 +21,9 @@ const Login = () => {
                     <LoginButton> 로그인 </LoginButton>
                     <JoinButton> 회원가입 </JoinButton>
                 </Button>
-                <Text> 구글로 로그인 하기 </Text>
+
+                <FcGoogle size="30" />
+
             </Form>
         </LoginWrapper>
     );
@@ -112,7 +115,4 @@ background-color: #CFB8FF;
   }
 `;
 
-const Text = styled.div`
-  font-size: 20px; 
-`;
 
