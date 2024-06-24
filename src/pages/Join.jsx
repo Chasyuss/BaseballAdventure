@@ -2,31 +2,31 @@ import React from 'react'
 import styled from 'styled-components';
 
 const Join = () => {
-    return (
-        <JoinWrapper>
-            <Form>
-                <Title> 회원가입 </Title>
-                <JoinInput>
-                    <Label>아이디:</Label>
-                    <Input type="email" placeholder="아이디를 입력하세요" />
-                </JoinInput>
+  return (
+    <JoinWrapper>
+      <Form>
+        <Title> 회원가입 </Title>
+        <JoinInput>
+          <Label>아이디:</Label>
+          <Input type="email" placeholder="아이디를 입력하세요" />
+        </JoinInput>
 
-                <JoinInput>
-                    <Label>비밀번호:</Label>
-                    <Input type="password" placeholder="비밀번호를 입력하세요" />
-                </JoinInput>
+        <JoinInput>
+          <Label>비밀번호:</Label>
+          <Input type="password" placeholder="비밀번호를 입력하세요" />
+        </JoinInput>
 
-                <JoinInput>
-                    <Label> 닉네임:</Label>
-                    <Input type="text" placeholder="닉네임을 입력하세요" />
-                </JoinInput>
-                <Button type="submit">
-                    회원가입
-                </Button>
-                <Text> 구글로 회원가입 하기 </Text>
-            </Form>
-        </JoinWrapper>
-    );
+        <JoinInput>
+          <Label> 닉네임:</Label>
+          <Input type="text" placeholder="닉네임을 입력하세요" />
+        </JoinInput>
+        <Button type="submit">
+          회원가입
+        </Button>
+        <Text> 구글로 회원가입 하기 </Text>
+      </Form>
+    </JoinWrapper>
+  );
 };
 
 
@@ -40,6 +40,7 @@ const JoinWrapper = styled.div`
   padding: 20px; 
   background-color: #FEFFDD;
   margin: 20px;
+  border: 1px solid #333;
 `;
 
 
