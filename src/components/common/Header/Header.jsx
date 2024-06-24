@@ -13,14 +13,13 @@ const Header = () => {
                 </Usermenu>
             </Form>
         </Container>
-    )
-}
+    );
+};
 
 export default Header;
 
 const Container = styled.div`
     background-color: #f8f8f8;
-    height: 100vh;
 `;
 
 const Form = styled.div`
