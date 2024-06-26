@@ -6,6 +6,7 @@ import Join from '../pages/Join';
 import Mypage from '../pages/Mypage';
 import Gameroom from '../pages/Gameroom';
 import Makeroom from '../pages/Makeroom';
+import Gamepage from '../pages/Gamepage';
 
 const router = createBrowserRouter([
     {
@@ -30,6 +31,12 @@ const router = createBrowserRouter([
             {
                 path: '/makeroom',
                 element: <Makeroom />
+            },
+
+
+            {
+                path: '/gamepage',
+                element: <Gamepage />
             }
         ]
     },
