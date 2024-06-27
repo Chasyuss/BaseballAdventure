@@ -3,11 +3,13 @@ import styled from 'styled-components';
 import { FcGoogle } from "react-icons/fc";
 import authAPI from '../api/auth.api';
 import { useNavigate } from 'react-router-dom';
+import useUserStore from '../store/useUserStore';
 
 const Login = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
   const navigate = useNavigate();
+  const { setUser } = useUserStore();
 
   const handlerSignIn = async (e) => {
     e.preventDefault();
@@ -25,6 +27,10 @@ const Login = () => {
     } catch (error) {
       throw new Error(`로그인 실패 : ${error.message}`);
     }
+
+    const userInfo = await authAPI.GerUser();
+    console.log("userinfo", userInfo);
+    setUser(userInfo);
 
   };
 

@@ -3,16 +3,20 @@ import styled from 'styled-components';
 import Logoimg from '../../../images/logo.png'
 import authAPI from '../../../api/auth.api';
 import { useNavigate } from 'react-router-dom';
+import useUserStore from '../../../store/useUserStore';
+
 
 
 const Header = () => {
-    const [user, setUser] = useState({ email: '', password: '' });
+    // const [user, setUser] = useState({ email: '', password: '' });
+    const { user, setUser } = useUserStore();
     const navigate = useNavigate();
 
     const handlerLogout = () => {
         authAPI.SignOut();
         setUser(null);
         console.log('로그아웃 완료');
+        console.log(user);
     }
 
     const gotoLogin = () => {
@@ -27,7 +31,7 @@ const Header = () => {
                 <Usermenu>
                     {user ? (
                         <>
-                            <UserName>{user.nickname} 님</UserName>
+                            <UserName> {user ? `${user.nickname}님` : '로그인이 필요합니다'} </UserName>
                             <Loginbutton onClick={handlerLogout}>
                                 로그아웃
                             </Loginbutton>
