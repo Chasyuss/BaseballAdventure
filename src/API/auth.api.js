@@ -47,6 +47,34 @@ class AuthAPI {
       throw new Error(`로그아웃 실패 : ${error.message}`);
     }
   };
+
+  GerUser = async () => {
+    try {
+      const {
+        data: { user },
+        error: getUserError
+      } = await supabase.auth.getUser();
+      if (getUserError) {
+        throw Error(getUserError.message);
+      }
+
+      const {
+        data: [userData],
+        error: userError
+      } = await supabase.from('users').select().eq('id', user.id);
+      if (userError) {
+        throw Error(userError.message);
+      }
+
+      return {
+        id: user.id,
+        email: user.email,
+        nickname: userData.nickname
+      };
+    } catch (error) {
+      throw new Error(`유저 정보 가져오기 실패 : ${error.message}`);
+    }
+  };
 }
 
 const authAPI = new AuthAPI();
