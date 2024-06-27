@@ -1,20 +1,45 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import styled from 'styled-components';
 import { FcGoogle } from "react-icons/fc";
+import authAPI from '../api/auth.api';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const navigate = useNavigate();
+
+  const handlerSignIn = async (e) => {
+    e.preventDefault();
+
+    const logIn = {
+      email: emailRef.current.value,
+      password: passwordRef.current.value,
+    };
+
+    try {
+      console.log("logininfo", logIn);
+      await authAPI.SignIn(logIn);
+      navigate('/');
+
+    } catch (error) {
+      throw new Error(`로그인 실패 : ${error.message}`);
+    }
+
+  };
+
   return (
-    <LoginWrapper>
+    <LoginWrapper onSubmit={handlerSignIn}>
       <Form>
         <Title> 로그인 </Title>
         <LoginInput>
           <Label>아이디:</Label>
-          <Input type="email" placeholder="아이디를 입력하세요" />
+          <Input type="email" placeholder="아이디를 입력하세요" ref={emailRef} required />
         </LoginInput>
 
         <LoginInput>
           <Label>비밀번호:</Label>
-          <Input type="password" placeholder="비밀번호를 입력하세요" />
+          <Input type="password" placeholder="비밀번호를 입력하세요" ref={passwordRef} required />
         </LoginInput>
 
         <Button>
