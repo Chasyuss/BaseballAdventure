@@ -16,7 +16,7 @@ const Join = () => {
 
     const info = {
       email: emailRef.current.value,
-      password: emailRef.current.value,
+      password: passwordRef.current.value,
       nickname: nicknameRef.current.value,
     };
 

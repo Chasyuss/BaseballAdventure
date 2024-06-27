@@ -24,6 +24,18 @@ class AuthAPI {
       throw new Error(`회원가입 실패: ${error.message}`);
     }
   };
+
+  SignIn = async ({ email, password }) => {
+    try {
+      const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({ email, password });
+      if (signInError) {
+        throw Error(signInError.message);
+      }
+      return signInData;
+    } catch (error) {
+      throw new Error(`로그인 실패: ${error.message}`);
+    }
+  };
 }
 
 const authAPI = new AuthAPI();
