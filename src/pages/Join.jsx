@@ -1,24 +1,58 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import styled from 'styled-components';
+import authAPI from '../api/auth.api';
+import { useNavigate } from 'react-router-dom';
+
 
 const Join = () => {
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const nicknameRef = useRef();
+
+  const navigate = useNavigate();
+
+  const handlerSignup = async (e) => {
+    e.preventDefault();
+
+    const info = {
+      email: emailRef.current.value,
+      password: emailRef.current.value,
+      nickname: nicknameRef.current.value,
+    };
+
+    try {
+      console.log("joininfo", info);
+      await authAPI.SignUp(info);
+
+      emailRef.current.value = '';
+      passwordRef.current.value = '';
+      nicknameRef.current.value = '';
+
+      navigate('/login');
+
+    } catch (error) {
+      throw new Error(`회원가입 실패 : ${error.message}`);
+    }
+  };
+
+
   return (
-    <JoinWrapper>
+    <JoinWrapper onSubmit={handlerSignup}>
       <Form>
         <Title> 회원가입 </Title>
         <JoinInput>
           <Label>아이디:</Label>
-          <Input type="email" placeholder="아이디를 입력하세요" />
+          <Input type="email" placeholder="아이디를 입력하세요" ref={emailRef} required />
         </JoinInput>
 
         <JoinInput>
           <Label>비밀번호:</Label>
-          <Input type="password" placeholder="비밀번호를 입력하세요" />
+          <Input type="password" placeholder="비밀번호를 입력하세요" ref={passwordRef} required />
         </JoinInput>
 
         <JoinInput>
           <Label> 닉네임:</Label>
-          <Input type="text" placeholder="닉네임을 입력하세요" />
+          <Input type="text" placeholder="닉네임을 입력하세요" ref={nicknameRef} required />
         </JoinInput>
         <Button type="submit">
           회원가입
