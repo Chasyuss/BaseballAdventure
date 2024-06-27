@@ -36,6 +36,17 @@ class AuthAPI {
       throw new Error(`로그인 실패: ${error.message}`);
     }
   };
+
+  SignOut = () => {
+    try {
+      const { error: signOutError } = supabase.auth.signOut();
+      if (signOutError) {
+        throw Error(signOutError.message);
+      }
+    } catch (error) {
+      throw new Error(`로그아웃 실패 : ${error.message}`);
+    }
+  };
 }
 
 const authAPI = new AuthAPI();

@@ -1,15 +1,42 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components';
 import Logoimg from '../../../images/logo.png'
+import authAPI from '../../../api/auth.api';
+import { useNavigate } from 'react-router-dom';
+
 
 const Header = () => {
+    const [user, setUser] = useState({ email: '', password: '' });
+    const navigate = useNavigate();
+
+    const handlerLogout = () => {
+        authAPI.SignOut();
+        setUser(null);
+        console.log('로그아웃 완료');
+    }
+
+    const gotoLogin = () => {
+        navigate('/login');
+    }
+
+
     return (
         <Container>
             <Form>
                 <Logo src={Logoimg} alt="header-logo" />
                 <Usermenu>
-                    <UserName> 사용자 님 </UserName>
-                    <Loginbutton> 로그인 </Loginbutton>
+                    {user ? (
+                        <>
+                            <UserName>{user.nickname} 님</UserName>
+                            <Loginbutton onClick={handlerLogout}>
+                                로그아웃
+                            </Loginbutton>
+                        </>
+                    ) : (
+                        <Loginbutton onClick={gotoLogin}>
+                            로그인
+                        </Loginbutton>
+                    )}
                 </Usermenu>
             </Form>
         </Container>
