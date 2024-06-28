@@ -1,14 +1,11 @@
 import React, { useState } from 'react'
 import styled from 'styled-components';
-import Logoimg from '../../../images/logo.png'
+import Logoimg from '../../../images/logo.svg'
 import authAPI from '../../../api/auth.api';
 import { useNavigate } from 'react-router-dom';
 import useUserStore from '../../../store/useUserStore';
 
-
-
 const Header = () => {
-    // const [user, setUser] = useState({ email: '', password: '' });
     const { user, setUser } = useUserStore();
     const navigate = useNavigate();
 
@@ -65,7 +62,7 @@ const Form = styled.div`
 
 
 const Logo = styled.img`
-    height: 50px;
+    height: 46px;
     cursor: pointer;
 
 `;
