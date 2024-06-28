@@ -34,6 +34,10 @@ const Login = () => {
 
   };
 
+  const gotoJoin = () => {
+    navigate('/join');
+  }
+
   return (
     <LoginWrapper onSubmit={handlerSignIn}>
       <Form>
@@ -50,7 +54,7 @@ const Login = () => {
 
         <Button>
           <LoginButton> 로그인 </LoginButton>
-          <JoinButton> 회원가입 </JoinButton>
+          <JoinButton onClick={gotoJoin}> 회원가입 </JoinButton>
         </Button>
 
         <FcGoogle size="30" />
