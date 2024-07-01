@@ -13,22 +13,31 @@ const Header = () => {
         authAPI.SignOut();
         setUser(null);
         console.log('로그아웃 완료');
-        console.log(user);
+        console.log(user.data);
     }
 
     const gotoLogin = () => {
         navigate('/login');
     }
 
+    const gotoMypage = () => {
+        navigate('/mypage');
+    }
+
+    const gotoHome = () => {
+        navigate('/');
+    }
+
 
     return (
         <Container>
             <Form>
-                <Logo src={Logoimg} alt="header-logo" />
+                <Logo src={Logoimg} alt="header-logo" onClick={gotoHome} />
                 <Usermenu>
                     {user ? (
                         <>
-                            <UserName> {user ? `${user.nickname}님` : '로그인이 필요합니다'} </UserName>
+                            <ProfileImage src={user.profileimage} alt="profile" />
+                            <UserName onClick={gotoMypage}> {`${user.nickname}님`} </UserName>
                             <Loginbutton onClick={handlerLogout}>
                                 로그아웃
                             </Loginbutton>
@@ -67,6 +76,14 @@ const Logo = styled.img`
 
 `;
 
+const ProfileImage = styled.img`
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid #333;
+    margin-right: 10px;
+`;
+
 const Usermenu = styled.div`
     display: flex;
     align-items: center;
@@ -74,6 +91,7 @@ const Usermenu = styled.div`
 
 const UserName = styled.div`
     margin-right: 20px;
+    cursor: pointer;
 `;
 
 const Loginbutton = styled.button`

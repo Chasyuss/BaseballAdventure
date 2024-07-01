@@ -69,7 +69,8 @@ class AuthAPI {
       return {
         id: user.id,
         email: user.email,
-        nickname: userData.nickname
+        nickname: userData.nickname,
+        profileimage: userData.profileimage
       };
     } catch (error) {
       throw new Error(`유저 정보 가져오기 실패 : ${error.message}`);
