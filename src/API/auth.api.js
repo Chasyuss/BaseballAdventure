@@ -48,7 +48,7 @@ class AuthAPI {
     }
   };
 
-  GerUser = async () => {
+  GetUser = async () => {
     try {
       const {
         data: { user },
@@ -74,6 +74,22 @@ class AuthAPI {
       };
     } catch (error) {
       throw new Error(`유저 정보 가져오기 실패 : ${error.message}`);
+    }
+  };
+
+  UpdateUser = async (userInfo) => {
+    try {
+      const { data: updateUserData, error: updateUserError } = await supabase
+        .from('users')
+        .update(userInfo)
+        .eq('id', userInfo.id);
+      if (updateUserError) {
+        console.log('업데이트 에러!!!', error);
+        throw Error(updateUserError.message);
+      }
+      return updateUserData;
+    } catch (error) {
+      throw new Error(`유저 정보 수정 실패함! : ${error.message}`);
     }
   };
 }
