@@ -28,7 +28,7 @@ const Login = () => {
       throw new Error(`로그인 실패 : ${error.message}`);
     }
 
-    const userInfo = await authAPI.GerUser();
+    const userInfo = await authAPI.GetUser();
     console.log("userinfo", userInfo);
     setUser(userInfo);
 
