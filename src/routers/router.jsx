@@ -7,6 +7,7 @@ import Mypage from '../pages/Mypage';
 import Gameroom from '../pages/Gameroom';
 import Makeroom from '../pages/Makeroom';
 import Gamepage from '../pages/Gamepage';
+import { requireAuthLoader } from './requireAuthLoader';
 
 const router = createBrowserRouter([
     {
@@ -20,7 +21,8 @@ const router = createBrowserRouter([
 
             {
                 path: '/mypage',
-                element: <Mypage />
+                element: <Mypage />,
+                loader: requireAuthLoader
             },
 
             {

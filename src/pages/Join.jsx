@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react'
 import styled from 'styled-components';
 import authAPI from '../api/auth.api';
 import { useNavigate } from 'react-router-dom';
+import supabase from '../api/supabaseAPI';
 
 
 const Join = () => {
@@ -13,6 +14,7 @@ const Join = () => {
 
   const handlerSignup = async (e) => {
     e.preventDefault();
+
 
     const info = {
       email: emailRef.current.value,

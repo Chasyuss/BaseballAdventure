@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import styled from 'styled-components';
 import Logoimg from '../../../images/logo.svg'
 import authAPI from '../../../api/auth.api';
@@ -36,8 +35,8 @@ const Header = () => {
                 <Usermenu>
                     {user ? (
                         <>
-                            <ProfileImage src={user.profileimage} alt="profile" />
-                            <UserName onClick={gotoMypage}> {`${user.nickname}님`} </UserName>
+                            <ProfileImage src={user?.profileimage} alt="profile" />
+                            <UserName onClick={gotoMypage}> {`${user?.nickname}님`} </UserName>
                             <Loginbutton onClick={handlerLogout}>
                                 로그아웃
                             </Loginbutton>
@@ -59,7 +58,7 @@ const Container = styled.div`
     background-color: #f8f8f8;
 `;
 
-const Form = styled.div`
+const Form = styled.form`
     background-color: white;
     padding: 20px;
     border: 1px solid #333;

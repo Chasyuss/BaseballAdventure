@@ -61,10 +61,12 @@ class AuthAPI {
       const {
         data: [userData],
         error: userError
-      } = await supabase.from('users').select().eq('id', user.id);
+      } = await supabase.from('users').select('*').eq('id', user.id);
       if (userError) {
         throw Error(userError.message);
       }
+
+      console.log('아니', userData);
 
       return {
         id: user.id,
@@ -82,11 +84,15 @@ class AuthAPI {
       const { data: updateUserData, error: updateUserError } = await supabase
         .from('users')
         .update(userInfo)
-        .eq('id', userInfo.id);
+        .select()
+        .eq('id', userInfo.id)
+        .single();
+
       if (updateUserError) {
         console.log('업데이트 에러!!!', updateUserError);
         throw new Error(updateUserError.message);
       }
+
       return updateUserData;
     } catch (error) {
       throw new Error(`유저 정보 수정 실패함! : ${error.message}`);
