@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import useUserStore from '../store/useUserStore';
 import authAPI from '../api/auth.api';
@@ -7,23 +7,28 @@ import { uploadFile } from '../api/storage';
 
 const Mypage = () => {
   const { user, setUser } = useUserStore();
-  const [nickname, setNickname] = useState(user.nickname);
+  const [nickname, setNickname] = useState("");
   const [profileImage, setProfileImage] = useState(null);
-  const [profileImageUrl, setProfileImageUrl] = useState(user.profileimage || '');
+  const [profileImageUrl, setProfileImageUrl] = useState('');
+
+  useEffect(() => {
+    if (user) {
+      setNickname(user.nickname);
+      setProfileImageUrl(user.profileimage);
+    }
+  }, [user]);
 
   const handleNicknameChange = (e) => {
-    console.log('닉네임 변경:', e.target.value);
     setNickname(e.target.value);
   };
 
   const handleProfileImageChange = (e) => {
-    console.log('프로필 이미지 변경:', e.target.files[0]);
     setProfileImage(e.target.files[0]);
   };
 
+  console.log("나용", user);
   const handleUpdate = async (e) => {
     e.preventDefault();
-    console.log('수정하고싶어');
 
     try {
       let updatedProfileImageUrl = profileImageUrl;
@@ -31,6 +36,7 @@ const Mypage = () => {
         updatedProfileImageUrl = await uploadFile(profileImage);
         console.log('업로드된 이미지 URL:', updatedProfileImageUrl);
       }
+
 
       const updatedUser = {
         id: user.id,
@@ -54,7 +60,7 @@ const Mypage = () => {
           <ProfileCircle>
             <ProfilImage src={profileImageUrl} alt="user" />
           </ProfileCircle>
-          <Name>{user.nickname}</Name>
+          <Name>{user?.nickname}</Name>
         </ProfileSection>
         <Divider />
         <Edit>
@@ -82,7 +88,7 @@ const MypageWrapper = styled.div`
   border: 1px solid #333;
 `;
 
-const Form = styled.div`
+const Form = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
