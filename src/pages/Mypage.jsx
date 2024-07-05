@@ -1,33 +1,72 @@
-import React from 'react'
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import profile from '../images/memoticon.png'
+import useUserStore from '../store/useUserStore';
+import authAPI from '../api/auth.api';
+import { uploadFile } from '../api/storage';
+
 
 const Mypage = () => {
-    return (
-        <MypageWrapper>
-            <Form>
-                <ProfileSection>
-                    <ProfileCircle>
-                        <ProfilImage src={profile} alt="user" />
-                    </ProfileCircle>
+  const { user, setUser } = useUserStore();
+  const [nickname, setNickname] = useState(user.nickname);
+  const [profileImage, setProfileImage] = useState(null);
+  const [profileImageUrl, setProfileImageUrl] = useState(user.profileimage || '');
 
-                    <Name> 사용자 </Name>
-                </ProfileSection>
+  const handleNicknameChange = (e) => {
+    console.log('닉네임 변경:', e.target.value);
+    setNickname(e.target.value);
+  };
 
-                <Divider />
+  const handleProfileImageChange = (e) => {
+    console.log('프로필 이미지 변경:', e.target.files[0]);
+    setProfileImage(e.target.files[0]);
+  };
 
-                <Edit>
-                    <Label> 프로필 변경</Label>
-                    <Input type="text" />
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+    console.log('수정하고싶어');
 
-                    <Label> 닉네임 변경 </Label>
-                    <Input type="text" />
+    try {
+      let updatedProfileImageUrl = profileImageUrl;
+      if (profileImage) {
+        updatedProfileImageUrl = await uploadFile(profileImage);
+        console.log('업로드된 이미지 URL:', updatedProfileImageUrl);
+      }
 
-                    <Button> 수정하기 </Button>
-                </Edit>
-            </Form>
-        </MypageWrapper>
-    );
+      const updatedUser = {
+        id: user.id,
+        nickname,
+        profileimage: updatedProfileImageUrl,
+      };
+
+      const updatedUserData = await authAPI.UpdateUser(updatedUser);
+      console.log('업데이트 성공:', updatedUserData);
+      setUser(updatedUserData);
+      setProfileImageUrl(updatedProfileImageUrl);
+    } catch (error) {
+      console.error('업데이트 에러:', error);
+    }
+  };
+
+  return (
+    <MypageWrapper>
+      <Form>
+        <ProfileSection>
+          <ProfileCircle>
+            <ProfilImage src={profileImageUrl} alt="user" />
+          </ProfileCircle>
+          <Name>{user.nickname}</Name>
+        </ProfileSection>
+        <Divider />
+        <Edit>
+          <Label>프로필 변경</Label>
+          <Input type="file" onChange={handleProfileImageChange} />
+          <Label>닉네임 변경</Label>
+          <Input type="text" value={nickname} onChange={handleNicknameChange} />
+          <Button type="submit" onClick={handleUpdate}>수정하기</Button>
+        </Edit>
+      </Form>
+    </MypageWrapper>
+  );
 };
 
 export default Mypage;
@@ -61,7 +100,6 @@ const ProfileCircle = styled.div`
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  background-color: #ddd;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -79,6 +117,7 @@ const ProfilImage = styled.img`
   width: 100px;
   height: 100px;
   border-radius: 50%;
+  object-fit: cover;
 `;
 
 const Name = styled.h2`
@@ -123,5 +162,9 @@ const Button = styled.button`
   margin-top: 20px;
   width: 200px;
   text-align: center;
+
+  &:hover {
+    background-color: #f8cacc;
+  }
     
 `;
