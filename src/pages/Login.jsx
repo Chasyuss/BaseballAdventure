@@ -39,7 +39,7 @@ const Login = () => {
   }
 
   return (
-    <LoginWrapper onSubmit={handlerSignIn}>
+    <LoginWrapper>
       <Form>
         <Title> 로그인 </Title>
         <LoginInput>
@@ -53,7 +53,7 @@ const Login = () => {
         </LoginInput>
 
         <Button>
-          <LoginButton> 로그인 </LoginButton>
+          <LoginButton onClick={handlerSignIn}> 로그인 </LoginButton>
           <JoinButton onClick={gotoJoin}> 회원가입 </JoinButton>
         </Button>
 

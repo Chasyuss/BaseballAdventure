@@ -84,8 +84,8 @@ class AuthAPI {
         .update(userInfo)
         .eq('id', userInfo.id);
       if (updateUserError) {
-        console.log('업데이트 에러!!!', error);
-        throw Error(updateUserError.message);
+        console.log('업데이트 에러!!!', updateUserError);
+        throw new Error(updateUserError.message);
       }
       return updateUserData;
     } catch (error) {
