@@ -3,8 +3,14 @@ import Header from '../components/common/Header/Header'
 import BaseballIcon from '../images/baseballicon.png';
 import styled from 'styled-components';
 import { GlobalStyles } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const Main = () => {
+    const navigate = useNavigate();
+
+    const gotoRoom = () => {
+        navigate('/room');
+    }
     return (
         <Maincontatiner>
             <Form>
@@ -17,6 +23,7 @@ const Main = () => {
                 <Button> 게임 전적 확인하기 </Button>
                 <Button> 게임하기 </Button>
                 <Button> 방 만들기 </Button>
+                <Button onClick={gotoRoom}> 게임 방 가기 </Button>
             </Form>
         </Maincontatiner>
 
@@ -66,4 +73,8 @@ const Button = styled.button`
     cursor: pointer;
     width: 300px;
     margin: 30px;
+
+    &:hover {
+    background-color: #f8cacc;
+  }
 `;
