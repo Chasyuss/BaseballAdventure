@@ -7,6 +7,9 @@ import { useNavigate } from 'react-router-dom';
 
 const Main = () => {
     const navigate = useNavigate();
+    const gotoMakeRoom = () => {
+        navigate('/makeroom');
+    }
 
     const gotoRoom = () => {
         navigate('/room');
@@ -22,7 +25,7 @@ const Main = () => {
 
                 <Button> 게임 전적 확인하기 </Button>
                 <Button> 게임하기 </Button>
-                <Button> 방 만들기 </Button>
+                <Button onClick={gotoMakeRoom}> 방 만들기 </Button>
                 <Button onClick={gotoRoom}> 게임 방 가기 </Button>
             </Form>
         </Maincontatiner>

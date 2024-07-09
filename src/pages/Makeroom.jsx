@@ -1,7 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components';
+import roomAPI from '../api/room.api';
+
 
 const Makeroom = () => {
+    const [roomName, setRoomName] = useState('');
+    const [chance, setChance] = useState('');
+
+    const handleCreateRoom = async (e) => {
+        e.preventDefault();
+
+
+        try {
+            await roomAPI.Make({ roomName, chance });
+            console.log('방 만들기 성공');
+        } catch (error) {
+            console.log('방 만들기 에러', error);
+        }
+    };
+
     return (
         <MakeroomWrapper>
             <Form>
@@ -10,19 +27,19 @@ const Makeroom = () => {
 
                 <OptionInput>
                     <Label> 방 이름 </Label>
-                    <Input type="text" />
+                    <Input type="text" value={roomName} onChange={(e) => setRoomName(e.target.value)} />
                 </OptionInput>
 
                 <OptionInput>
                     <Label> 기회 횟수 </Label>
-                    <Input type="text" />
+                    <Input type="text" value={chance} onChange={(e) => setChance(e.target.value)} />
                 </OptionInput>
 
-                <Button> 완료 </Button>
+                <Button type='submit' onClick={handleCreateRoom}> 완료 </Button>
             </Form>
         </MakeroomWrapper>
-    )
-}
+    );
+};
 
 export default Makeroom;
 
@@ -90,5 +107,9 @@ const Button = styled.button`
   width: 200px;
   text-align: center;
   font-size: 15px;
+
+  &:hover {
+    background-color: #f8cacc;
+  }
     
 `;
